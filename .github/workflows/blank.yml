@@ -1,0 +1,30 @@
+name: Java Compilation Check
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the code from the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up JDK (Java Development Kit)
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin' # Use Temurin JDK distribution
+          java-version: '17' # Specify the version of Java you need (e.g., 8, 11, 17, etc.)
+
+      # Compile the project using Maven
+      - name: Compile with Maven
+        run: mvn clean compile
+
